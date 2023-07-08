@@ -1,4 +1,5 @@
 global using AccountOrganizationService.Services.DepartmentService;
+global using AccountOrganizationService.Services.ProjectService;
 global using AccountOrganizationService.Models;
 global using AccountOrganizationService.Data;
 global using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+builder.Services.AddScoped<IProjectService, ProjectService>();
 
 var app = builder.Build();
 
