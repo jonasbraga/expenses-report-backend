@@ -16,6 +16,18 @@ public class DepartmentController : ControllerBase
         _logger = logger;
     }
 
+    [HttpGet("Get/{id}")]
+    public async Task<ActionResult<List<Department>>> Get(int id)
+    {
+        var result = await _departmentService.GetDepartment(id);
+        if (result.Data is null)
+        {
+            return NotFound(result);
+        }
+
+        return Ok(result);
+    }
+
     [HttpGet("GetAll")]
     public async Task<ActionResult<List<Department>>> GetAll()
     {

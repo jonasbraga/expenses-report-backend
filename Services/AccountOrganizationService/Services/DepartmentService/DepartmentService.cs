@@ -99,15 +99,32 @@ namespace AccountOrganizationService.Services.DepartmentService
             {
                 serviceResponse.Success = false;
                 serviceResponse.Message = "Unexpected error occurred";
-                throw;
             }
 
             return serviceResponse;
         }
 
-        public Task<ServiceResponse<GetDepartmentDto>> GetDepartment(string id)
+        public async Task<ServiceResponse<GetDepartmentDto>> GetDepartment(int id)
         {
-            throw new NotImplementedException();
+            var serviceResponse = new ServiceResponse<GetDepartmentDto>();
+            try
+            {
+                var dbDepartments = await _context.Departments
+                        .Include(d => d.Managers)
+                        .FirstOrDefaultAsync(d => d.Id == id);
+                if (dbDepartments is null)
+                    throw new Exception($"Department with Id '{id}' not found.");
+
+                var departmentResponse = _mapper.Map<GetDepartmentDto>(dbDepartments);
+                serviceResponse.Data = departmentResponse;
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+
+            return serviceResponse;
         }
 
         public async Task<ServiceResponse<GetDepartmentDto>> UpdateDepartment(UpdateDepartmentRequestDto updatedDepartment)
