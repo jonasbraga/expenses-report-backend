@@ -1,5 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-
 namespace AccountOrganizationService.Data
 {
     public class AppDbContext : DbContext
@@ -8,5 +6,11 @@ namespace AccountOrganizationService.Data
         public DbSet<Department> Departments => Set<Department>();
         public DbSet<User> Users => Set<User>();
         public DbSet<Project> Projects => Set<Project>();
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Seed();
+        }
     }
 }

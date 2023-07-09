@@ -41,7 +41,7 @@ namespace AccountOrganizationService.Data
             return serviceResponse;
         }
 
-        public string CreatePasswordHash(string password)
+        static public string CreatePasswordHash(string password)
         {
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(password);
             return passwordHash;

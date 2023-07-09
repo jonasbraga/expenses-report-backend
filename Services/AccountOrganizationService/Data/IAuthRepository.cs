@@ -7,6 +7,5 @@ namespace AccountOrganizationService.Data
 
         //Task<ServiceResponse<int>> Register(User user, string password);
         Task<ServiceResponse<string>> Login(string username, string password);
-        string CreatePasswordHash(string password);
     }
 }
