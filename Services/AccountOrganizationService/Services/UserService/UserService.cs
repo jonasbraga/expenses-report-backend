@@ -7,11 +7,13 @@ namespace AccountOrganizationService.Services.UserService
 
         private readonly IMapper _mapper;
         private readonly AppDbContext _context;
+        private readonly IAuthRepository _authRepository;
 
-        public UserService(IMapper mapper, AppDbContext context)
+        public UserService(IMapper mapper, AppDbContext context, IAuthRepository authRepository)
         {
             _mapper = mapper;
             _context = context;
+            _authRepository = authRepository;
         }
         public async Task<ServiceResponse<GetUserDto>> GetUser(string id)
         {
@@ -101,10 +103,12 @@ namespace AccountOrganizationService.Services.UserService
                 var user = _mapper.Map<User>(newUser);
                 user.Departments = newUser.DepartmentsId?.Select(id => _context.Departments.First(d => d.Id == id)).ToList();
                 user.Supervisor = supervisor;
+                user.Password = _authRepository.CreatePasswordHash(newUser.Password);
 
                 await _context.Users.AddAsync(user);
                 await _context.SaveChangesAsync();
 
+                // Question: Send email to user with password?
                 var userResponse = _mapper.Map<List<GetUserDto>>(await _context.Users
                     .Include(u => u.Departments)
                     .ToListAsync());
@@ -165,7 +169,7 @@ namespace AccountOrganizationService.Services.UserService
 
                 user.Departments = updatedUser.DepartmentsId?.Select(id => _context.Departments.First(d => d.Id == id)).ToList();
                 user.Supervisor = supervisor;
-
+                user.Password = _authRepository.CreatePasswordHash(updatedUser.Password);
                 await _context.SaveChangesAsync();
 
                 var userResponse = _mapper.Map<GetUserDto>(user);
