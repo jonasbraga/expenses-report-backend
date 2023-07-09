@@ -5,6 +5,8 @@ namespace AccountOrganizationService.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    // TODO: Use Role enum instead of string
+    [Authorize(Roles = "Accountant, Manager, FieldStaff")]
     public class ProjectController : ControllerBase
     {
 

@@ -5,6 +5,7 @@ namespace AccountOrganizationService.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize(Roles = "Accountant")]
 public class DepartmentController : ControllerBase
 {
     private readonly ILogger<DepartmentController> _logger;

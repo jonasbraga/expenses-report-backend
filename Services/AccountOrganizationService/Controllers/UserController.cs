@@ -5,6 +5,7 @@ namespace AccountOrganizationService.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize(Roles = "Accountant, Manager")]
 public class UserController : ControllerBase
 {
 

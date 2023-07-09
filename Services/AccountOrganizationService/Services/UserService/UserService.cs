@@ -81,6 +81,7 @@ namespace AccountOrganizationService.Services.UserService
                     throw new Exception($"Supervisor with id '{newUser.SupervisorId}' not found");
                 }
 
+                // TODO: Managers can only create field staff users
                 if (supervisor.Role != Role.Manager)
                 {
                     throw new Exception($"Supervisor with id '{newUser.SupervisorId}' is not a manager");
