@@ -14,13 +14,31 @@ namespace AccountOrganizationService
             CreateMap<CreateDepartmentRequestDto, Department>();
             // User
             CreateMap<User, GetUserDto>()
-                .ForMember(dest => dest.SupervisorId, opt => opt.MapFrom(src => src.Supervisor.Id))
-                .ForMember(dest => dest.Supervisor, opt => opt.MapFrom(src => src.Supervisor));
+                .ForMember(dest => dest.DepartmentsId, opt => opt.MapFrom(src => src.Departments.Select(d => d.Id)));
+            CreateMap<CreateUserRequestDto, User>();
+            CreateMap<UpdateUserRequestDto, User>();
+            // TODO: figure out how to map role to readable string
+            //.ForMember(dest => dest.Role, opt => opt.MapFrom(src => MapRole(src.Role)));
 
             // Project
             CreateMap<Project, GetProjectDto>();
             CreateMap<CreateProjectRequestDto, Project>();
             CreateMap<UpdateProjectRequestDto, Project>();
+        }
+
+        private string MapRole(Role role)
+        {
+            switch (role)
+            {
+                case Role.Accountant:
+                    return "Accountant";
+                case Role.FieldStaff:
+                    return "Field Staff";
+                case Role.Manager:
+                    return "Manager";
+                default:
+                    return "Unknown";
+            }
         }
     }
 }

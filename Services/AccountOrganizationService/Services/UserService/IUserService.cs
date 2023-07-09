@@ -4,12 +4,10 @@ namespace AccountOrganizationService.Services.UserService
 {
     public interface IUserService
     {
-        Task<ServiceResponse<List<User>>> GetAllUsers();
-        Task<ServiceResponse<User>> GetUser(string id);
-        Task<ServiceResponse<List<GetUserDto>>> CreateUser(User newUser);
-        Task<ServiceResponse<User>> UpdateUser(string id);
-        Task<ServiceResponse<User>> DeleteUser(string id);
-
-
+        Task<ServiceResponse<GetUserDto>> GetUser(string id);
+        Task<ServiceResponse<List<GetUserDto>>> GetAllUsers();
+        Task<ServiceResponse<List<GetUserDto>>> CreateUser(CreateUserRequestDto newUser);
+        Task<ServiceResponse<GetUserDto>> UpdateUser(UpdateUserRequestDto updatedUser);
+        Task<ServiceResponse<List<GetUserDto>>> DeleteUser(string id);
     }
 }

@@ -38,7 +38,7 @@ namespace AccountOrganizationService2.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departments", (string)null);
                 });
 
             modelBuilder.Entity("AccountOrganizationService.Models.Project", b =>
@@ -66,7 +66,7 @@ namespace AccountOrganizationService2.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Projects");
+                    b.ToTable("Projects", (string)null);
                 });
 
             modelBuilder.Entity("AccountOrganizationService.Models.User", b =>
@@ -121,7 +121,7 @@ namespace AccountOrganizationService2.Migrations
 
                     b.HasIndex("SupervisorId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("DepartmentUser", b =>
@@ -136,7 +136,7 @@ namespace AccountOrganizationService2.Migrations
 
                     b.HasIndex("ManagersId");
 
-                    b.ToTable("DepartmentUser");
+                    b.ToTable("DepartmentUser", (string)null);
                 });
 
             modelBuilder.Entity("AccountOrganizationService.Models.Project", b =>

@@ -1,5 +1,8 @@
+// Question: Is it better to use global using statements or to use the using statement in each file?
+// is there a difference between the two? or an standard to follow?
 global using AccountOrganizationService.Services.DepartmentService;
 global using AccountOrganizationService.Services.ProjectService;
+global using AccountOrganizationService.Services.UserService;
 global using AccountOrganizationService.Models;
 global using AccountOrganizationService.Data;
 global using Microsoft.EntityFrameworkCore;
@@ -24,6 +27,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
