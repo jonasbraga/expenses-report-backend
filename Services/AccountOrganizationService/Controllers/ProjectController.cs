@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AccountOrganizationService.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class ProjectController : ControllerBase
     {
 
