@@ -14,6 +14,17 @@ services:
     volumes:
       - db-volume:/var/lib/mysql
 
+  account-organization-service:
+    build:
+      context: ../Services/AccountOrganizationService
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    depends_on:
+      - mysql-db
+    environment:
+      - ConnectionStrings:DefaultConnection=server=mysql-db;user=user;password=password;database=expenses-report
+
 volumes:
   db-volume:
 
