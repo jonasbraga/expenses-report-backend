@@ -5,8 +5,24 @@
 More details:
 [https://excalidraw.com/#json=ko9pFkoCun5zvubG7i_eY,RAyrmB8QKFn9Z2iUGl2hrw](https://excalidraw.com/#json=ko9pFkoCun5zvubG7i_eY,RAyrmB8QKFn9Z2iUGl2hrw)
 
-![Initial architecture diagram](image.png)
+![Initial architecture diagram](docs/image.png)
 
+
+## Live endpoint
+
+To hit the live endpoint use the following request:
+```shell
+curl --location 'http://20.15.240.57:80/Auth/Login' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "email": "admin@expense.report",
+    "password":"123123123"
+}'
+```
+
+The API documentation can be found by running the application locally (using docker compose or not) in Development mode and accessing swagger definition
+You can also check the swagge image below, there's an image with all the available endpoints
+More details below:
 
 ## How to run locally (Development)
 
@@ -18,7 +34,7 @@ on the root folder run:
 
 Then hit the [http://localhost/swagger/index.html](http://localhost/swagger/index.html) location to see the swagger
 
-![Swagger](image-1.png)
+![Swagger](docs/image-1.png)
 
 The routes are protected, don't forget to login and place the authorization header before hitting the endpoints
 
