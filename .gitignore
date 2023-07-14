@@ -477,3 +477,6 @@ $RECYCLE.BIN/
 *.lnk
 
 .vscode
+
+.env
+helper-commands.md

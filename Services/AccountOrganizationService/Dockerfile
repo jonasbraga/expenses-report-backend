@@ -5,6 +5,7 @@
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
 EXPOSE 80 443
+COPY .env /app/
 # Dev ports
 # EXPOSE 53526 5030 7219 5030
 

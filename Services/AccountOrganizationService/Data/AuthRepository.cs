@@ -64,7 +64,7 @@ namespace AccountOrganizationService.Data
                 new Claim(ClaimTypes.Role, user.Role.ToString())
             };
 
-            var appSettingsToken = _configuration.GetSection("AppSettings:Token").Value;
+            var appSettingsToken = System.Environment.GetEnvironmentVariable("JWT_TOKEN");
             if (appSettingsToken is null)
                 throw new Exception("AppSettings Token is null!");
 

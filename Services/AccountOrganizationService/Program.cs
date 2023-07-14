@@ -15,11 +15,16 @@ using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var env = System.Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+var envFile = (env == Environments.Production || env is null) ? ".env" : $".env.{env}";
+
+DotNetEnv.Env.Load(envFile);
+
 // Add services to the container.
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    var connectionString = System.Environment.GetEnvironmentVariable("CONNECTION_STRING");
     var serverVersion = new MySqlServerVersion(new Version(8, 0, 33));
     options.UseMySql(connectionString, serverVersion);
 });
@@ -52,7 +57,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         {
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8
-                    .GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value!)),
+                    .GetBytes(System.Environment.GetEnvironmentVariable("JWT_TOKEN")!)),
             ValidateIssuer = false,
             ValidateAudience = false
         };

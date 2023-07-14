@@ -23,8 +23,7 @@ services:
     depends_on:
       - mysql-db
     environment:
-      - ConnectionStrings:DefaultConnection=server=mysql-db;user=user;password=password;database=expenses-report
+      ASPNETCORE_ENVIRONMENT: Production
 
 volumes:
   db-volume:
-
