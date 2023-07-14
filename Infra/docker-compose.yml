@@ -23,7 +23,9 @@ services:
     depends_on:
       - mysql-db
     environment:
-      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_ENVIRONMENT: Development
+    volumes:
+      - ../Services/AccountOrganizationService/.env.Development:/app/.env.Development
 
 volumes:
   db-volume:
