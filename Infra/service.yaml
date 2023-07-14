@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: expenses-project-service
+spec:
+  selector:
+    app: expenses-project
+  type: LoadBalancer
+  ports:
+    - name: expenses-project-service
+      port: 80
+      protocol: TCP

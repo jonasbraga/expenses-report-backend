@@ -1,0 +1,31 @@
+version: '3.5'
+
+services:
+  mysql-db:
+    image: mysql:8.0.33
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: expenses-report
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - db-volume:/var/lib/mysql
+
+  account-organization-service:
+    build:
+      context: ../Services/AccountOrganizationService
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    depends_on:
+      - mysql-db
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    volumes:
+      - ../Services/AccountOrganizationService/.env.Development:/app/.env.Development
+
+volumes:
+  db-volume:

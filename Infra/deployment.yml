@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "expenses-project-deployment"
+  labels:
+    app: "expenses-project"
+spec:
+  selector:
+    matchLabels:
+      app: "expenses-project"
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: "expenses-project"
+    spec:
+      containers:
+        - name: "expenses-project"
+          image: expensesreportaccountorganizationservice.azurecr.io/acc-org-svc:1.3
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
